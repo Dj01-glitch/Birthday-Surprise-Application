@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hey Riyu! 💖 Something Special Awaits!</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Pacifico&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
@@ -10,12 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
@@ -23,17 +18,7 @@
             overflow-x: hidden;
             position: relative;
         }
-
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.4;
-        }
-
+        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.4; }
         .bg-animation span {
             position: absolute;
             width: 20px;
@@ -42,14 +27,12 @@
             border-radius: 50%;
             animation: floatBg 15s infinite linear;
         }
-
         @keyframes floatBg {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 0.8; }
             90% { opacity: 0.8; }
             100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
-
         .container {
             position: relative;
             z-index: 10;
@@ -59,7 +42,6 @@
             justify-content: center;
             padding: 20px;
         }
-
         .fun-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -74,23 +56,15 @@
             position: relative;
             overflow: hidden;
         }
-
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(50px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
-        .confetti-corner {
-            position: absolute;
-            font-size: 3rem;
-            opacity: 0.3;
-        }
-
+        .confetti-corner { position: absolute; font-size: 3rem; opacity: 0.3; }
         .confetti-1 { top: 10px; left: 10px; transform: rotate(-20deg); }
         .confetti-2 { top: 10px; right: 10px; transform: rotate(20deg); }
         .confetti-3 { bottom: 10px; left: 10px; transform: rotate(20deg); }
         .confetti-4 { bottom: 10px; right: 10px; transform: rotate(-20deg); }
-
         .fun-badge {
             display: inline-block;
             background: linear-gradient(135deg, #ff6b9d, #c44569);
@@ -102,12 +76,10 @@
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-
         .date-big {
             font-family: 'Comic Neue', cursive;
             font-size: 4rem;
@@ -119,71 +91,31 @@
             margin: 20px 0;
             animation: rainbow 3s infinite;
         }
-
         @keyframes rainbow {
             0% { filter: hue-rotate(0deg); }
             100% { filter: hue-rotate(360deg); }
         }
-
-        .question {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: #764ba2;
-            margin: 20px 0;
-        }
-
-        .hint-text {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .emoji-big {
-            font-size: 4rem;
-            margin: 20px 0;
-            animation: bounce 1s infinite;
-        }
-
+        .question { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #764ba2; margin: 20px 0; }
+        .hint-text { font-size: 1.2rem; color: #555; margin: 15px 0; line-height: 1.6; }
+        .emoji-big { font-size: 4rem; margin: 20px 0; animation: bounce 1s infinite; }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-
         .meme-section {
             background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
             padding: 20px;
             border-radius: 20px;
             margin: 30px 0;
-            position: relative;
         }
-
-        .meme-text {
-            font-family: 'Comic Neue', cursive;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2d3436;
-        }
-
-        .laugh-meter {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .laugh-emoji {
-            font-size: 2rem;
-            animation: shake 0.5s infinite;
-        }
-
+        .meme-text { font-family: 'Comic Neue', cursive; font-size: 1.3rem; font-weight: 700; color: #2d3436; }
+        .laugh-meter { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; }
+        .laugh-emoji { font-size: 2rem; animation: shake 0.5s infinite; }
         @keyframes shake {
             0%, 100% { transform: rotate(0deg); }
             25% { transform: rotate(-10deg); }
             75% { transform: rotate(10deg); }
         }
-
         .surprise-btn {
             background: linear-gradient(135deg, #ff6b9d, #764ba2);
             color: white;
@@ -198,62 +130,20 @@
             margin: 30px 0 20px;
             font-family: 'Comic Neue', cursive;
             border: 3px solid white;
-            position: relative;
-            overflow: hidden;
             text-decoration: none;
             display: inline-block;
         }
-
-        .surprise-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
-        }
-
-        .surprise-btn i {
-            margin-right: 10px;
-            animation: spin 2s infinite;
-        }
-
+        .surprise-btn:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6); }
+        .surprise-btn i { margin-right: 10px; animation: spin 2s infinite; }
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .countdown-item {
-            background: rgba(118, 75, 162, 0.1);
-            padding: 10px 15px;
-            border-radius: 15px;
-            min-width: 70px;
-        }
-
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #764ba2;
-        }
-
-        .countdown-label {
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
+        .countdown { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        .countdown-item { background: rgba(118, 75, 162, 0.1); padding: 10px 15px; border-radius: 15px; min-width: 70px; }
+        .countdown-number { font-size: 2rem; font-weight: 700; color: #764ba2; }
+        .countdown-label { font-size: 0.8rem; color: #666; }
+        .floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
         .heart-float {
             position: absolute;
             color: #ff6b9d;
@@ -261,21 +151,13 @@
             animation: floatUp 4s infinite;
             opacity: 0;
         }
-
         @keyframes floatUp {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 0.8; }
             90% { opacity: 0.8; }
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
-
-        .fun-facts {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-        }
-
+        .fun-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
         .fact-card {
             background: rgba(255, 255, 255, 0.8);
             padding: 15px;
@@ -284,37 +166,17 @@
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
-
-        .fact-card:hover {
-            transform: scale(1.05);
-            border-color: #ff6b9d;
-            background: white;
-        }
-
-        .fact-emoji {
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        .fact-text {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #555;
-        }
-
+        .fact-card:hover { transform: scale(1.05); border-color: #ff6b9d; background: white; }
+        .fact-emoji { font-size: 2rem; margin-bottom: 5px; }
+        .fact-text { font-size: 0.9rem; font-weight: 600; color: #555; }
         .hidden-message {
             background: linear-gradient(135deg, #a8e6cf, #d4edda);
             padding: 15px;
             border-radius: 15px;
             margin: 20px 0;
             display: none;
-            animation: slideIn 0.5s ease;
         }
-
-        .hidden-message.show {
-            display: block;
-        }
-
+        .hidden-message.show { display: block; }
         .spinner {
             display: inline-block;
             width: 20px;
@@ -325,7 +187,6 @@
             animation: spin 1s ease-in-out infinite;
             margin-left: 10px;
         }
-
         @media (max-width: 768px) {
             .fun-card { padding: 30px 20px; }
             .date-big { font-size: 3rem; }
@@ -403,10 +264,11 @@
             <span id="factMessage"></span>
         </div>
 
-        <a href="main.html" class="surprise-btn" id="surpriseBtn" onclick="return goToSurprise(event)">
+        <!-- SIMPLE BUTTON - NO COMPLICATED LINKS -->
+        <button class="surprise-btn" id="surpriseBtn" onclick="goToMainPage()">
             <i class="fas fa-gift"></i>
             <span id="btnText">OPEN YOUR SURPRISE!</span>
-        </a>
+        </button>
 
         <div class="hint-text" style="font-size: 0.9rem; opacity: 0.7;">
             ⚠️ Warning: May cause excessive happiness, laughter, and emotional tears! 💖
@@ -480,8 +342,8 @@
         setTimeout(() => messageDiv.classList.remove('show'), 3000);
     }
 
-    function goToSurprise(event) {
-        event.preventDefault();
+    // SIMPLE REDIRECT FUNCTION
+    function goToMainPage() {
         const btnText = document.getElementById('btnText');
         btnText.innerHTML = 'Loading Magic... <span class="spinner"></span>';
 
@@ -490,10 +352,12 @@
         setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.7 } }), 400);
 
         const music = document.getElementById('teaserMusic');
-        if (music) music.play().catch(e => console.log('Audio play failed:', e));
+        if (music) music.play().catch(e => console.log(''));
 
-        setTimeout(() => { window.location.href = 'main.html'; }, 2000);
-        return false;
+        // SIMPLE REDIRECT - this will work everywhere!
+        setTimeout(() => {
+            window.location.replace('main.html');
+        }, 2000);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -505,7 +369,7 @@
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') document.querySelector('.surprise-btn').click();
+        if (e.key === 'Enter') goToMainPage();
     });
 
     console.log('%c🎂 Hey Riyu! Ready for the BEST birthday surprise ever? 💖', 'font-size: 18px; color: #ff6b9d; font-weight: bold;');
