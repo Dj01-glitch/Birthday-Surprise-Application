@@ -403,7 +403,7 @@
             <span id="factMessage"></span>
         </div>
 
-        <a href="/main" class="surprise-btn" id="surpriseBtn" onclick="return goToSurprise(event)">
+        <a href="main.html" class="surprise-btn" id="surpriseBtn" onclick="return goToSurprise(event)">
             <i class="fas fa-gift"></i>
             <span id="btnText">OPEN YOUR SURPRISE!</span>
         </a>
@@ -492,7 +492,7 @@
         const music = document.getElementById('teaserMusic');
         if (music) music.play().catch(e => console.log('Audio play failed:', e));
 
-        setTimeout(() => { window.location.href = '/main'; }, 2000);
+        setTimeout(() => { window.location.href = 'main.html'; }, 2000);
         return false;
     }
 
