@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Hey Riyu! 💖 Something Special Awaits!</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Pacifico&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .bg-animation span {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: floatBg 15s infinite linear;
+        }
+
+        @keyframes floatBg {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .fun-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px 40px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slideIn 1s ease;
+            border: 3px solid #ff6b9d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .confetti-corner {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .confetti-1 { top: 10px; left: 10px; transform: rotate(-20deg); }
+        .confetti-2 { top: 10px; right: 10px; transform: rotate(20deg); }
+        .confetti-3 { bottom: 10px; left: 10px; transform: rotate(20deg); }
+        .confetti-4 { bottom: 10px; right: 10px; transform: rotate(-20deg); }
+
+        .fun-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .date-big {
+            font-family: 'Comic Neue', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b9d, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            animation: rainbow 3s infinite;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .question {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        .hint-text {
+            font-size: 1.2rem;
+            color: #555;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .emoji-big {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .meme-section {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .meme-text {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3436;
+        }
+
+        .laugh-meter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .laugh-emoji {
+            font-size: 2rem;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .surprise-btn {
+            background: linear-gradient(135deg, #ff6b9d, #764ba2);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+            margin: 30px 0 20px;
+            font-family: 'Comic Neue', cursive;
+            border: 3px solid white;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .surprise-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .surprise-btn i {
+            margin-right: 10px;
+            animation: spin 2s infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .countdown-item {
+            background: rgba(118, 75, 162, 0.1);
+            padding: 10px 15px;
+            border-radius: 15px;
+            min-width: 70px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #764ba2;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart-float {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 25px;
+            animation: floatUp 4s infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .fun-facts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .fact-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .fact-card:hover {
+            transform: scale(1.05);
+            border-color: #ff6b9d;
+            background: white;
+        }
+
+        .fact-emoji {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .fact-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .hidden-message {
+            background: linear-gradient(135deg, #a8e6cf, #d4edda);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .hidden-message.show {
+            display: block;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .fun-card { padding: 30px 20px; }
+            .date-big { font-size: 3rem; }
+            .question { font-size: 2rem; }
+            .surprise-btn { font-size: 1.4rem; padding: 15px 30px; }
+            .fun-facts { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-animation" id="bgAnimation"></div>
+<div class="floating-hearts" id="floatingHearts"></div>
+
+<div class="container">
+    <div class="fun-card">
+        <div class="confetti-corner confetti-1">🎉</div>
+        <div class="confetti-corner confetti-2">🎊</div>
+        <div class="confetti-corner confetti-3">🎈</div>
+        <div class="confetti-corner confetti-4">✨</div>
+
+        <div class="fun-badge">
+            <i class="fas fa-calendar-alt"></i> SPECIAL DAY ALERT! 🚨
+        </div>
+
+        <div class="date-big">17th April</div>
+        <div class="question">Ready for it, Riyu? 🤔</div>
+        <div class="emoji-big">🎂 🎁 🎈 🎉 🎊</div>
+
+        <div class="hint-text">
+            <i class="fas fa-arrow-down"></i> Someone special made something extra special for you! <i class="fas fa-arrow-down"></i>
+        </div>
+
+        <div class="meme-section">
+            <div class="meme-text">
+                <span class="laugh-emoji">😂</span>
+                "When your bestie/sister/everything spends 48 hours coding instead of sleeping..."
+                <span class="laugh-emoji">😭</span>
+            </div>
+            <div class="laugh-meter">
+                <span>Laugh Meter:</span>
+                <span>🤣</span> <span>😂</span> <span>😆</span> <span>😹</span> <span>💀</span>
+            </div>
+        </div>
+
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+        <div class="hint-text" style="font-size: 0.9rem;">
+            Until your birthday magic expires! (JK, it's forever 😘)
+        </div>
+
+        <div class="fun-facts">
+            <div class="fact-card" onclick="revealFact()">
+                <div class="fact-emoji">🤫</div>
+                <div class="fact-text">Click for a secret!</div>
+            </div>
+            <div class="fact-card" onclick="revealFact()">
+                <div class="fact-emoji">💭</div>
+                <div class="fact-text">Click for another!</div>
+            </div>
+        </div>
+
+        <div class="hidden-message" id="hiddenMessage">
+            <span id="factMessage"></span>
+        </div>
+
+        <a href="/main" class="surprise-btn" id="surpriseBtn" onclick="return goToSurprise(event)">
+            <i class="fas fa-gift"></i>
+            <span id="btnText">OPEN YOUR SURPRISE!</span>
+        </a>
+
+        <div class="hint-text" style="font-size: 0.9rem; opacity: 0.7;">
+            ⚠️ Warning: May cause excessive happiness, laughter, and emotional tears! 💖
+        </div>
+    </div>
+</div>
+
+<audio id="teaserMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    function createBgAnimation() {
+        const container = document.getElementById('bgAnimation');
+        for (let i = 0; i < 30; i++) {
+            const span = document.createElement('span');
+            span.style.left = Math.random() * 100 + '%';
+            span.style.animationDelay = Math.random() * 15 + 's';
+            span.style.animationDuration = (10 + Math.random() * 10) + 's';
+            span.style.width = (5 + Math.random() * 20) + 'px';
+            span.style.height = span.style.width;
+            container.appendChild(span);
+        }
+    }
+
+    function createFloatingHearts() {
+        const container = document.getElementById('floatingHearts');
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.innerHTML = ['❤️', '💖', '💕', '💗', '💝'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }, 500);
+    }
+
+    function updateCountdown() {
+        const now = new Date();
+        const birthday = new Date(now.getFullYear(), 3, 17);
+        if (now > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
+
+        const diff = birthday - now;
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    const funFacts = [
+        "🤫 Pssst... This website was made with 10 cups of coffee and infinite love! ☕💕",
+        "💭 Fun fact: The creator thinks you're the BEST sister-friend in the universe! 🌟",
+        "🎂 The cake cutting animation took 5 hours to perfect! Worth it for you! 💖",
+        "💜 Secret: There's a whole BTS section waiting for you! Borahae! 💜",
+        "😭 Truth: You might cry. Bring tissues. Lots of them! 🧻",
+        "🎮 P.S. There are GAMES! Because you're fun and deserve fun things! 🎯"
+    ];
+
+    function revealFact() {
+        const messageDiv = document.getElementById('hiddenMessage');
+        const factSpan = document.getElementById('factMessage');
+        factSpan.textContent = funFacts[Math.floor(Math.random() * funFacts.length)];
+        messageDiv.classList.add('show');
+
+        confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
+        setTimeout(() => messageDiv.classList.remove('show'), 3000);
+    }
+
+    function goToSurprise(event) {
+        event.preventDefault();
+        const btnText = document.getElementById('btnText');
+        btnText.innerHTML = 'Loading Magic... <span class="spinner"></span>';
+
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+        setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.3 } }), 200);
+        setTimeout(() => confetti({ particleCount: 100, spread: 80, origin: { y: 0.5, x: 0.7 } }), 400);
+
+        const music = document.getElementById('teaserMusic');
+        if (music) music.play().catch(e => console.log('Audio play failed:', e));
+
+        setTimeout(() => { window.location.href = '/main'; }, 2000);
+        return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        createBgAnimation();
+        createFloatingHearts();
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        setTimeout(() => confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } }), 500);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') document.querySelector('.surprise-btn').click();
+    });
+
+    console.log('%c🎂 Hey Riyu! Ready for the BEST birthday surprise ever? 💖', 'font-size: 18px; color: #ff6b9d; font-weight: bold;');
+</script>
+</body>
+</html>
